@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -13,10 +14,16 @@ export class AppComponent {
   orderedDocs: any = [];
   constructor(
     private http: HttpClient,
+    private router: Router,
+    private route: ActivatedRoute,
   ) {
     const data: any = this.getData();
     for (let x in data) {
-      this.data[x] = this.refineData(data[x]);
+      if (!this.data[x]) {
+        this.data[x] = {};
+      }
+      this.data[x]['ocrString'] = this.refineData(data[x]['ocrString']);
+      this.data[x]['title'] = data[x]['title'];
     }
     console.log(this.data);
   }
@@ -26,12 +33,12 @@ export class AppComponent {
 
     const rawDocList: any = {};
     for (let x in this.data) {
-      console.log(x)
       rawDocList[x] = this.searchSingleTerm(term, x);
     }
-    console.log(rawDocList)
     this.orderedDocs = this.organizeDict(rawDocList);
+
     console.log(this.orderedDocs);
+
   }
 
   searchSingleTerm(term: string, dataSetName: any) {
@@ -43,10 +50,10 @@ export class AppComponent {
         selected: false,
       };
     }
-    for (let x = 0; x < this.data[dataSetName].length; x++) {
-      if (termDict[this.data[dataSetName][x]] || termDict[this.data[dataSetName][x].toLowerCase()]) {
-        if (!termDict[this.data[dataSetName][x].toLowerCase()].selected) {
-          termDict[this.data[dataSetName][x].toLowerCase()].selected = true;
+    for (let x = 0; x < this.data[dataSetName]['ocrString'].length; x++) {
+      if (termDict[this.data[dataSetName]['ocrString'][x]] || termDict[this.data[dataSetName]['ocrString'][x].toLowerCase()]) {
+        if (!termDict[this.data[dataSetName]['ocrString'][x].toLowerCase()].selected) {
+          termDict[this.data[dataSetName]['ocrString'][x].toLowerCase()].selected = true;
           hitTerms++;
         }
       }
@@ -60,7 +67,13 @@ export class AppComponent {
     dictKeys.sort((a: any, b: any) => {
       return dict[b] - dict[a];
     });
-    return dictKeys;
+
+    const fullArr = [];
+    for (let i = 0; i < dictKeys.length; i++) {
+      fullArr[i] = this.data[dictKeys[i]];
+    }
+    // return dictKeys;
+    return fullArr;
   }
 
   refineData(dataStr: string) {
@@ -83,8 +96,16 @@ export class AppComponent {
 
   getData() {
     const data: any = {};
-    data['doc3'] = `blarg blerg blorg`;
-    data['doc1'] =  `
+    data['doc3'] = {
+      id: 3,
+      title: 'Document 1 for Testing',
+      ocrString: `blarg blerg blorg`,
+    };
+
+    data['doc1'] = {};
+    data['doc1']['id'] = 1;
+    data['doc1']['title'] = 'USCENTCOM Chief of Staff CG Talking Points';
+    data['doc1']['ocrString'] =  `
 
 Declassified by: MG Michael X. Garrett,
 USCENTCOM Chief of Staff
@@ -526,7 +547,10 @@ TBD Back 8-»=f m ‘/INC I CG (CS/Effecle}
 9
     `
 
-    data['doc2'] = `
+    data['doc2'] = {};
+    data['doc2']['id'] = 2;
+    data['doc2']['title'] = 'OPSUM Three Companies (-) Hilla SWAT';
+    data['doc2']['ocrString'] =  `
     Declassified by: MG Michael X. Garrett,
              USCENTCOM Chief of Staff
                De이assified on: 201505

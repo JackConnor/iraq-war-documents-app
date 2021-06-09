@@ -1,0 +1,45 @@
+<div class="admin-holder">
+  <div class="new-document-holder">
+    <div class="new-document-title">
+      Make New Document
+    </div>
+    <input #title type="text" placeholder="Title">
+    <input #date type="text" placeholder="Date">
+    <input #categories type="text" placeholder="Categories (comma seperated)">
+    <input #pdfLink type="file" placeholder="PDF Link" (change)="openPdf($event)">
+    <textarea #ocrText type="text" placeholder="OCR Text"></textarea>
+    <div
+      class="submit-document-button"
+      (click)="submitNewDocument(
+        title,
+        date,
+        categories,
+        pdfLink,
+        ocrText
+      )"
+    >
+      Submit New Document
+    </div>
+  </div>
+  <div class="results-holder">
+    <div
+      class="no-results-present"
+      *ngIf="!docs || docs.length === 0"
+    >
+      No Documents Present
+    </div>
+    <div
+      *ngIf="docs && docs.length > 0"
+    >
+      <div
+        class="single-result"
+        *ngFor="let doc of docs"
+        [routerLink]="['/document/' + doc.id]"
+      >
+        <div class="doc-title">
+          {{doc.title}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

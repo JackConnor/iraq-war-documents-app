@@ -1,0 +1,60 @@
+<div class="page-holder">
+  <div class="map-holder">
+    <div class="map-image-holder">
+      <img src="https://usarmyiraqwar.com/wp-content/uploads/2021/02/Picture1.png" alt="">
+      <div class="map-filter"></div>
+    </div>
+    <div class="map-content">
+      <div class="map-title-1">
+        The U.S. Army in the
+      </div>
+      <div class="map-title-2">
+        iraq war
+      </div>
+      <div class="map-subtitle">
+        The Official History and Declassified Archives By the Authors
+      </div>
+    </div>
+  </div>
+  <div class="search-holder">
+    <div class="search-box">
+      <input
+        #searchEl type="text"
+        placeholder="Search Term"
+        (keyup.enter)="searchTerm(searchEl)"
+      >
+      <div class="search-button" (click)="searchTerm(searchEl)">
+        Search
+      </div>
+    </div>
+  </div>
+  <div class="results-holder">
+    <div
+      class="no-results-present"
+      *ngIf="!orderedDocs || orderedDocs.length === 0"
+    >
+      No Documents Present
+    </div>
+    <div
+      *ngIf="orderedDocs && orderedDocs.length > 0"
+    >
+      <div
+        class="single-result"
+        *ngFor="let doc of orderedDocs"
+        [routerLink]="['/document/' + doc.id]"
+      >
+        <div class="doc-title">
+          {{doc.title}}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="tags-holder">
+    <div class="single-tag-holder" *ngFor="let key of tags | keyvalue">
+      <div class="single-tag-holder-title">
+        {{ key.key }}
+      </div>
+      <input type="checkbox" [id]="key.key" (click)="selectTag(key.key)" />
+    </div>
+  </div>
+</div>
