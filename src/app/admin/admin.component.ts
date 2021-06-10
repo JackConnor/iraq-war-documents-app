@@ -23,15 +23,18 @@ export class AdminComponent implements OnInit {
     console.log(this.docs);
   }
 
-  submitNewDocument(title: any, date: any, categories: any, pdfLink: any, ocrText: any) {
+  async submitNewDocument(title: any, date: any, categories: any, pdfLink: any, ocrText: any) {
+    const pdfCloudLink = await this.uploadPdf();
+    console.log(pdfCloudLink);
     let req = {
       title: title.value,
       date: date.value,
       dateCreated: Date.now(),
       categories: categories.value.replace(/\s+/g, '').split(','),
-      pdfLink: pdfLink.value,
+      pdfLink: pdfLink,
       ocrText: ocrText.value,
     }
+    console.log(req);
     if (!this.file) {
       alert('Must select a pdf');
       return;
@@ -42,7 +45,7 @@ export class AdminComponent implements OnInit {
     ).subscribe((data: any) => {
       console.log(data);
       this.docs = data['docs'].reverse();
-      this.uploadPdf(data);
+
       window.location.reload();
     }, (err) => {
       console.log(err);
@@ -66,7 +69,7 @@ export class AdminComponent implements OnInit {
     });
   }
 
-  async uploadPdf(data: any) {
+  async uploadPdf() {
     const { url }: any = await this.http.post(
       `${this.env.apiUrl}/exams/get-signed-url-to-upload`,
       {
