@@ -1,0 +1,31 @@
+
+.document-holder {
+  position: relative;
+}
+
+.pdf-holder {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  max-height: 400px;
+  .pdf-embed {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.text-holder {
+  position: relative;
+  padding: 25px;
+  box-sizing: border-box;
+}
+
+.text-title {
+  font-size: 28px;
+}
+
+.text-text {
+  font-size: 21px;
+  padding: 10px;
+  box-sizing: border-box;
+}

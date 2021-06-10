@@ -26,24 +26,52 @@ export class HomeComponent implements OnInit {
     this.setupDocuments();
   }
 
-  setupDocuments() {
-    const data: any = this.getData();
-    console.log(data);
-    for (let x in data) {
-      if (!this.data[x]) {
-        this.data[x] = {};
-      }
-      this.data[x] = {
-        ocrString: this.removeWhiteSpaces(data[x]['ocrString']),
-        title: data[x]['title'],
-        id: data[x]['id'],
-        tags: data[x]['tags'],
-      };
-      this.meshTagsIntoList(data[x]['tags'])
-    }
-    console.log(this.data);
-    this.searchTerm({ value: '' });
+  async setupDocuments() {
+    this.orderedDocs = await this.getIraqDocs();
+    console.log(this.orderedDocs);
   }
+
+
+
+
+
+
+  getIraqDocs() {
+    return new Promise(async (res, rej) => {
+      const docs: any = await this.http.post(
+        `${this.env.apiUrl}/clinics/get-iraq-documents`,
+        {}
+      ).toPromise();
+      try {
+        res(docs.docs);
+      }
+      catch(err) {
+        console.log(err);
+        rej(err);
+      }
+    });
+  }
+
+
+
+  // setupDocuments() {
+  //   const data: any = this.getData();
+  //   console.log(data);
+  //   for (let x in data) {
+  //     if (!this.data[x]) {
+  //       this.data[x] = {};
+  //     }
+  //     this.data[x] = {
+  //       ocrString: this.removeWhiteSpaces(data[x]['ocrString']),
+  //       title: data[x]['title'],
+  //       id: data[x]['id'],
+  //       tags: data[x]['tags'],
+  //     };
+  //     this.meshTagsIntoList(data[x]['tags'])
+  //   }
+  //   console.log(this.data);
+  //   this.searchTerm({ value: '' });
+  // }
 
   meshTagsIntoList(tags: any) {
     for (let i = 0; i < tags.length; i++) {

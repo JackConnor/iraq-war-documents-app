@@ -17,24 +17,49 @@ export class AdminComponent implements OnInit {
   ) { }
 
   async ngOnInit(): Promise<any> {
-    const docs: any = await this.getIraqDocs();
+    this.getAllDocs();
+  }
 
-    this.docs = docs.reverse();
-    console.log(this.docs);
+  async deleteSingleDoc(id: any) {
+    console.log('Deleteing')
+    return new Promise(async (res, rej) => {
+      const docs: any = await this.http.post(
+        `${this.env.apiUrl}/clinics/delete-single-iraq-document`,
+        { id: id}
+      ).toPromise();
+      try {
+        this.getAllDocs();
+        res(docs.docs);
+      }
+      catch(err) {
+        console.log(err);
+        rej(err);
+      }
+    });
   }
 
   async submitNewDocument(title: any, date: any, categories: any, pdfLink: any, ocrText: any) {
+    if (!title.value || title.value ==  '') {
+      alert('Please add a title');
+      return;
+    }
+    if (!pdfLink.value || pdfLink.value ==  '') {
+      alert('Please add a PDF');
+      return;
+    }
+    if (!ocrText.value || ocrText.value ==  '') {
+      alert('Please add Text');
+      return;
+    }
     const pdfCloudLink = await this.uploadPdf();
-    console.log(pdfCloudLink);
     let req = {
       title: title.value,
       date: date.value,
       dateCreated: Date.now(),
       categories: categories.value.replace(/\s+/g, '').split(','),
-      pdfLink: pdfLink,
+      pdfLink: pdfCloudLink,
       ocrText: ocrText.value,
     }
-    console.log(req);
     if (!this.file) {
       alert('Must select a pdf');
       return;
@@ -43,7 +68,6 @@ export class AdminComponent implements OnInit {
       `${this.env.apiUrl}/clinics/post-iraq-document`,
       req
     ).subscribe((data: any) => {
-      console.log(data);
       this.docs = data['docs'].reverse();
 
       window.location.reload();
@@ -52,8 +76,12 @@ export class AdminComponent implements OnInit {
     });
   }
 
-  getIraqDocs() {
+  async getAllDocs() {
+    const docs: any = await this.getIraqDocs();
+    this.docs = docs.reverse();
+  }
 
+  getIraqDocs() {
     return new Promise(async (res, rej) => {
       const docs: any = await this.http.post(
         `${this.env.apiUrl}/clinics/get-iraq-documents`,
@@ -70,11 +98,12 @@ export class AdminComponent implements OnInit {
   }
 
   async uploadPdf() {
+    const newFileName: string = Math.random() + '-document-pdf.pdf';
     const { url }: any = await this.http.post(
       `${this.env.apiUrl}/exams/get-signed-url-to-upload`,
       {
-        fileName: this.file.name,
-        fileType: 'pdf',
+        fileName: newFileName,
+        fileType: 'application/pdf',
       }
     ).toPromise();
     return new Promise((res, rej) => {
@@ -83,8 +112,10 @@ export class AdminComponent implements OnInit {
       xhr.addEventListener('load', (data) => {
         const status = xhr.status;
         if (status === 200) {
+          console.log(data);
+          console.log(xhr);
           const newUrl = xhr.responseURL.split('?')[0];
-          res(`https://storage.googleapis.com/iraq-war-document-pdfs/${this.file.name}`);
+          res(`https://storage.cloud.google.com/testing-storage-video-5555/${newFileName}`);
         }
       });
       xhr.addEventListener('err', (err) => {

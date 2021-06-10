@@ -1,1 +1,17 @@
-<p>document works!</p>
+<div class="document-holder">
+  <div class="pdf-holder" *ngIf="document">
+    <embed
+      class="pdf-embed"
+      src="https://storage.cloud.google.com/testing-storage-video-5555/0.4880227896718934-document-pdf.pdf"
+      title="description"
+    />
+  </div>
+  <div class="text-holder" *ngIf="document">
+    <div class="text-title">
+      Raw OCR Text
+    </div>
+    <div class="text-text">
+      {{document.ocrText}}
+    </div>
+  </div>
+</div>
