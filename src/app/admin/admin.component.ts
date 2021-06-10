@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
+import { environment } from 'src/environments/environment';
+
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
@@ -8,6 +10,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class AdminComponent implements OnInit {
   docs: any;
+  env: any = environment;
   file: any;
   constructor(
     private http: HttpClient,
@@ -34,7 +37,7 @@ export class AdminComponent implements OnInit {
       return;
     }
     this.http.post(
-      'http://localhost:5555/api/clinics/post-iraq-document',
+      `${this.env.apiUrl}/clinics/post-iraq-document`,
       req
     ).subscribe((data: any) => {
       console.log(data);
@@ -50,7 +53,7 @@ export class AdminComponent implements OnInit {
 
     return new Promise(async (res, rej) => {
       const docs: any = await this.http.post(
-        'http://localhost:5555/api/clinics/get-iraq-documents',
+        `${this.env.apiUrl}/clinics/get-iraq-documents`,
         {}
       ).toPromise();
       try {
@@ -65,7 +68,7 @@ export class AdminComponent implements OnInit {
 
   async uploadPdf(data: any) {
     const { url }: any = await this.http.post(
-      'http://localhost:5555/api/exams/get-signed-url-to-upload',
+      `${this.env.apiUrl}/exams/get-signed-url-to-upload`,
       {
         fileName: this.file.name,
         fileType: 'pdf',

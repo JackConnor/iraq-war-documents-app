@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
 
+import { environment } from 'src/environments/environment';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -11,6 +13,7 @@ export class HomeComponent implements OnInit {
   title = 'iraqWar';
   data: any = {};
   documents: any = [];
+  env: any = environment;
   orderedDocs: any = [];
   tags: any = {};
   constructor(
@@ -65,7 +68,7 @@ export class HomeComponent implements OnInit {
 
   async searchSingleTerm(term: string, dataSetName: any) {
     const { docs }: any = await this.http.post(
-      'http://localhost:5555/api/clinics/get-iraq-documents',
+      `${this.env.apiUrl}/clinics/get-iraq-documents`,
       { searchQuery: term }
     ).toPromise();
     console.log(docs);
