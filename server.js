@@ -17,6 +17,6 @@ app.get('/*', function(req, res) {
   res.sendFile('index.html', {root: './dist/iraqWar/'});
 });
 
-app.listen(5555, () => {
-  console.log('Listening on 5555');
+app.listen(process.env.PORT || 8080, () => {
+  console.log('Listening on 8080');
 });
