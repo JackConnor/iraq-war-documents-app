@@ -20,6 +20,13 @@ export class AdminComponent implements OnInit {
     this.getAllDocs();
   }
 
+  askDeleteDoc(evt: any, id: any) {
+    evt.stopPropagation();
+    if (confirm('Delete this Document?')) {
+      this.deleteSingleDoc(id);
+    }
+  }
+
   async deleteSingleDoc(id: any) {
     console.log('Deleteing')
     return new Promise(async (res, rej) => {

@@ -35,10 +35,13 @@
         class="single-result"
         *ngFor="let doc of docs"
       >
-        <div class="doc-title">
+        <div
+          class="doc-title"
+          [routerLink]="['/document/' + doc._id]"
+        >
           {{doc.title}}
         </div>
-        <div class="doc-delete" (click)="deleteSingleDoc(doc._id)">
+        <div class="doc-delete" (click)="askDeleteDoc($event, doc._id)">
           DELETE
         </div>
       </div>
