@@ -5,8 +5,8 @@
     "ng": "ng",
     "start": "node main.js",
     "start:prod": "node server.js",
-    "build:prod": "npm run build --prod",
-    "build": "npm run build",
+    "build:prod": "ng build --prod",
+    "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
