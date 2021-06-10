@@ -41,7 +41,7 @@
       <div
         class="single-result"
         *ngFor="let doc of orderedDocs"
-        [routerLink]="['/document/' + doc.id]"
+        [routerLink]="['/document/' + doc._id]"
       >
         <div class="doc-title">
           {{doc.title}}

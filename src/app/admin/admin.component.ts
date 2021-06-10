@@ -35,6 +35,7 @@ export class AdminComponent implements OnInit {
         { id: id}
       ).toPromise();
       try {
+        console.log('Del')
         this.getAllDocs();
         res(docs.docs);
       }
@@ -86,6 +87,7 @@ export class AdminComponent implements OnInit {
   async getAllDocs() {
     const docs: any = await this.getIraqDocs();
     this.docs = docs.reverse();
+    console.log(docs);
   }
 
   getIraqDocs() {

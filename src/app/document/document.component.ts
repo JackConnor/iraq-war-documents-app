@@ -18,15 +18,20 @@ export class DocumentComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private route: ActivatedRoute,
-    private sanitizer: DomSanitizer,
+    public sanitizer: DomSanitizer,
   ) {
     this.documentId = this.route.snapshot.params.id;
   }
 
   ngOnInit(): void {
     this.getSingleDoc();
-    this.pdfLink = this.sanitizer.bypassSecurityTrustResourceUrl(this.document.pdfLink);
-    // console.log(this.pdfLink)
+  }
+
+  addPdfLink() {
+    const el: any = document.getElementsByClassName('pdf-embed')[0];
+    console.log(el);
+    console.log(this.pdfLink);
+    el['src'] = this.pdfLink;
   }
 
   async getSingleDoc(): Promise<any> {
@@ -34,6 +39,8 @@ export class DocumentComponent implements OnInit {
     try {
       console.log(doc);
       this.document = doc;
+      this.pdfLink = this.document.pdfLink;
+      this.addPdfLink();
     }
     catch(err) {
       console.log(err);
