@@ -1,12 +1,19 @@
 
 
 .page-holder {
+  position: relative;
   padding-bottom: 150px;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 15px;
+  background-color: #f9f9f9;
+  box-sizing: border-box;
+  font-family: sans-serif;
 }
 
 .map-image-holder {
   position: relative;
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   max-height: 700px;
   box-sizing: border-box;
@@ -53,9 +60,6 @@
   @media screen and (max-width: 768px) {
     font-size: 46px;
   }
-  // @media screen and (max-width: 414px) {
-  //   font-size: 38px;
-  // }
 }
 
 .map-title-2 {
@@ -76,14 +80,14 @@
 
 .search-holder {
   position: relative;
-  width: 100vw;
+  width: 100%;
   padding: 25px 0;
 }
 
 .search-box {
   position: relative;
-  width: 800px;
-  margin: 0 auto;
+  padding: 0 50px;
+  box-sizing: border-box;
   @media screen and (max-width: 768px) {
     width: 300px;
   }
@@ -95,7 +99,7 @@
     padding-left: 15px;
     border-radius: 4px;
     font-size: 22px;
-    background-color: #f9f9f9;
+    background-color: white;
     box-sizing: border-box;
   }
   input::placeholder {
@@ -119,20 +123,19 @@
 .results-holder {
   display: inline-block;
   vertical-align: top;
-  padding: 50px 25px;
-  width: 80vw;
+  padding: 0 25px;
+  width: 80%;
   max-width: 800px;
-  margin: 15px auto 0 auto;
+  margin: 0 auto;
   border-radius: 4px;
   box-sizing: border-box;
-  background-color: #f9f9f9;
 }
 
 .tags-holder {
   display: inline-block;
   vertical-align: top;
   width: 20%;
-  border: 2px solid blue;
+  background-color: white;
   box-sizing: border-box;
 }
 
@@ -145,7 +148,7 @@
 
 .single-result {
   width: 100%;
-  margin-top: 10px;
+  margin-top: 15px;
   border-radius: 4px;
   padding: 35px 15px;
   background-color: white;
@@ -155,16 +158,23 @@
   &:hover {
     background-color: #e0f2fb;
   }
+  &:first-of-type {
+    margin-top: 0;
+  }
   .doc-title {
     font-size: 28px;
   }
 }
 
 .single-tag-holder {
+  position: relative;
   padding: 15px 10px;
+  text-align: right;
   &-title {
-    display: inline-block;
-    width: 60px;
-    outline: 1px solid red;
+    position: absolute;
+    right: 32px;
+    width: calc(100% - 32px);
+    font-size: 16px;
+    box-sizing: border-box;
   }
 }

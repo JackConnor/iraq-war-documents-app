@@ -10,12 +10,12 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  title = 'iraqWar';
+  categories: any = {};
   data: any = {};
   documents: any = [];
   env: any = environment;
   orderedDocs: any = [];
-  tags: any = {};
+  title = 'iraqWar';
   constructor(
     private http: HttpClient,
     private router: Router,
@@ -29,11 +29,9 @@ export class HomeComponent implements OnInit {
   async setupDocuments() {
     this.orderedDocs = await this.getIraqDocs();
     console.log(this.orderedDocs);
+    this.categories = await this.makeCategoriesList(this.orderedDocs);
+    console.log(this.categories);
   }
-
-
-
-
 
 
   getIraqDocs() {
@@ -52,136 +50,63 @@ export class HomeComponent implements OnInit {
     });
   }
 
-
-
-  // setupDocuments() {
-  //   const data: any = this.getData();
-  //   console.log(data);
-  //   for (let x in data) {
-  //     if (!this.data[x]) {
-  //       this.data[x] = {};
-  //     }
-  //     this.data[x] = {
-  //       ocrString: this.removeWhiteSpaces(data[x]['ocrString']),
-  //       title: data[x]['title'],
-  //       id: data[x]['id'],
-  //       tags: data[x]['tags'],
-  //     };
-  //     this.meshTagsIntoList(data[x]['tags'])
-  //   }
-  //   console.log(this.data);
-  //   this.searchTerm({ value: '' });
-  // }
-
-  meshTagsIntoList(tags: any) {
-    for (let i = 0; i < tags.length; i++) {
-      if (!this.tags[tags[i]]) {
-        this.tags[tags[i]] = {
-          selected: false,
+  makeCategoriesList(docList: any) {
+    const categories = {};
+    for (let i = 0; i < docList.length; i++) {
+      for (let x = 0; x < docList[i].categories.length; x++) {
+        if (!categories[docList[i].categories[x]]) {
+          categories[docList[i].categories[x]] = {
+            selected: false,
+          }
         }
       }
     }
+
+    return categories;
   }
+
 
   searchTerm(input: any) {
-    const term: string = input.value;
-
-    const rawDocList: any = {};
-    for (let x in this.data) {
-      console.log(x)
-      rawDocList[x] = this.searchSingleTerm(term, x);
-    }
-    this.orderedDocs = this.organizeDict(rawDocList);
+    const terms = input.value.split(' ');
+    const filtered = terms.filter(e => e);
+    filtered.push(input.value);
+    this.searchTerms(filtered)
   }
 
-  async searchSingleTerm(term: string, dataSetName: any) {
+  async searchTerms(terms: string) {
     const { docs }: any = await this.http.post(
       `${this.env.apiUrl}/clinics/get-iraq-documents`,
-      { searchQuery: term }
+      { searchQuery: terms }
     ).toPromise();
     console.log(docs);
     this.orderedDocs = docs;
-    // const termArr: string[] = this.removeWhiteSpaces(term);
-    // const termDict: any = {};
-    // let hitTerms = 0;
-    // for (let i = 0; i < termArr.length; i++) {
-    //   termDict[termArr[i].toLowerCase()] = {
-    //     selected: false,
-    //   };
-    // }
-    // for (let x = 0; x < this.data[dataSetName]['ocrString'].length; x++) {
-    //   if (termDict[this.data[dataSetName]['ocrString'][x]] || termDict[this.data[dataSetName]['ocrString'][x].toLowerCase()]) {
-    //     if (!termDict[this.data[dataSetName]['ocrString'][x].toLowerCase()].selected) {
-    //       termDict[this.data[dataSetName]['ocrString'][x].toLowerCase()].selected = true;
-    //       hitTerms++;
-    //     }
-    //   }
-    // }
-    // console.log(hitTerms);
-    // return hitTerms;
   }
 
-  organizeDict(dict: any) {
-    const dictKeys = Object.keys(dict);
-    dictKeys.sort((a: any, b: any) => {
-      return dict[b] - dict[a];
-    });
-
-    const fullArr = [];
-    for (let i = 0; i < dictKeys.length; i++) {
-      fullArr[i] = this.data[dictKeys[i]];
+  async selectCategories(category) {
+    if (!this.categories[category].selected) {
+      this.categories[category].selected = true;
     }
-    return fullArr;
-  }
+    else {
+      this.categories[category].selected = false;
+    }
 
-  removeWhiteSpaces(dataStr: string) {
-    let dataArr: any = [];
-    const currArr = dataStr.split(' ');
-    for (let i = 0; i < currArr.length; i++) {
-      if (
-        currArr[i] != ' '
-        && currArr[i] != '  '
-        && currArr[i] != ''
-        && currArr[i].length > 0
-      ) {
-        dataArr.push(currArr[i]);
+    const catList = [];
+    for (let key in this.categories) {
+      if (this.categories[key].selected) {
+        catList.push(key)
       }
     }
-    return dataArr;
+
+    this.orderedDocs = await this.searchCategory(catList);
   }
 
-  selectTag(tag: any) {
-    this.tags[tag].selected = !this.tags[tag].selected;
-    this.filterByTags();
-  }
-
-  filterByTags() {
-    const newList: any[] = [];
-    for (let tag in this.tags) {
-
-      if (this.tags[tag].selected) {
-        for (let i = 0; i < this.orderedDocs.length; i++) {
-          let docHasTag = false;
-          for (let x = 0; x < this.orderedDocs[i].tags.length; x++) {
-            if (tag === this.orderedDocs[i].tags[x]) {
-              docHasTag = true;
-            }
-          }
-          if (docHasTag) {
-            newList.push(this.orderedDocs[i]);
-          }
-        }
-      }
-    }
-    console.log(newList);
-    this.setupDocuments();
-    this.searchTerm({ value: '' });
-    if (newList.length > 0) {
-      setTimeout(() => {
-        console.log(newList);
-        // this.orderedDocs = newList;
-      }, 1000);
-    }
+  async searchCategory(categories: string[]) {
+    const { docs }: any = await this.http.post(
+      `${this.env.apiUrl}/clinics/get-iraq-documents-by-category`,
+      { categories }
+    ).toPromise();
+    console.log(docs);
+    return docs;
   }
 
   getData() {

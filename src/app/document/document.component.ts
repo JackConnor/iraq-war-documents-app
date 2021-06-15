@@ -29,15 +29,12 @@ export class DocumentComponent implements OnInit {
 
   addPdfLink() {
     const el: any = document.getElementsByClassName('pdf-embed')[0];
-    console.log(el);
-    console.log(this.pdfLink);
     el['src'] = this.pdfLink;
   }
 
   async getSingleDoc(): Promise<any> {
     const doc: any = await this.getSingleIraqDoc();
     try {
-      console.log(doc);
       this.document = doc;
       this.pdfLink = this.document.pdfLink;
       this.addPdfLink();

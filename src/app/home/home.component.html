@@ -28,6 +28,14 @@
       </div>
     </div>
   </div>
+  <div class="tags-holder">
+    <div class="single-tag-holder" *ngFor="let key of categories | keyvalue">
+      <div class="single-tag-holder-title">
+        {{ key.key }}
+      </div>
+      <input type="checkbox" [id]="key.key" (click)="selectCategories(key.key)" />
+    </div>
+  </div>
   <div class="results-holder">
     <div
       class="no-results-present"
@@ -47,14 +55,6 @@
           {{doc.title}}
         </div>
       </div>
-    </div>
-  </div>
-  <div class="tags-holder">
-    <div class="single-tag-holder" *ngFor="let key of tags | keyvalue">
-      <div class="single-tag-holder-title">
-        {{ key.key }}
-      </div>
-      <input type="checkbox" [id]="key.key" (click)="selectTag(key.key)" />
     </div>
   </div>
 </div>
