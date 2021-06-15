@@ -41,6 +41,14 @@
         >
           {{doc.title}}
         </div>
+        <div class="categories-holder">
+          <div class="categories-title">
+            Categories:
+          </div>
+          <div class="single-category" *ngFor="let cat of doc.categories">
+            {{cat}}
+          </div>
+        </div>
         <div class="doc-delete" (click)="askDeleteDoc($event, doc._id)">
           DELETE
         </div>

@@ -1,4 +1,13 @@
 
+.admin-holder {
+  position: relative;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 25px;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
 .new-document {
   &-holder {
     position: relative;
@@ -66,7 +75,7 @@
   width: 100%;
   margin-top: 10px;
   border-radius: 4px;
-  padding: 35px 15px;
+  padding: 25px 15px 25px 15px;
   background-color: white;
   box-sizing: border-box;
   cursor: default;
@@ -75,6 +84,7 @@
     background-color: #e0f2fb;
   }
   .doc-title {
+    width: calc(100% - 110px);
     font-size: 28px;
   }
 }
@@ -87,4 +97,34 @@
   border: 1px solid gray;
   border-radius: 4px;
   cursor: default;
+}
+
+.categories-holder {
+  position: relative;
+  font-size: 14px;
+  margin-top: 20px;
+}
+
+.categories-title {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.single-category {
+  display: inline-block;
+  vertical-align: top;
+  margin-left: 10px;
+  font-size: 14px;
+  &-first-of-type {
+    margin-left: 0;
+  }
+}
+
+
+
+
+
+
+.blah {
+
 }
