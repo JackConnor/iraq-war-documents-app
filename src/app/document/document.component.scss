@@ -36,11 +36,22 @@
 }
 
 .text-title {
-  font-size: 28px;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.text-label {
+  margin-top: 25px;
+  font-size: 20px;
+  font-weight: 700;
 }
 
 .text-text {
   font-size: 21px;
   padding: 10px;
   box-sizing: border-box;
+}
+
+.text-date {
+  margin-top: 10px;
 }
