@@ -1,23 +1,38 @@
 
 .document-holder {
   position: relative;
+  width: 100vw;
 }
 
 .pdf-holder {
   position: relative;
-  width: 100vw;
+  display: inline-block;
+  vertical-align: top;
+  width: 50%;
   height: 100vh;
-  max-height: 400px;
+  @media screen and (max-width:769px) {
+    width: 100%;
+    height: 75vh;
+  }
   .pdf-embed {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
   }
 }
 
 .text-holder {
-  position: relative;
-  padding: 25px;
+  display: inline-block;
+  width: 50%;
+  vertical-align: top;
+  padding: 25px 45px;
   box-sizing: border-box;
+  @media screen and (max-width: 769px) {
+    width: 100%;
+    padding: 50px 25px;
+  }
 }
 
 .text-title {
