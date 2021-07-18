@@ -11,6 +11,9 @@
     <div class="text-date">
       Date: {{document.date}}
     </div>
+    <div class="text-date" *ngIf="document && document.categories">
+      Categories: {{document.categories.join(', ')}}
+    </div>
     <div class="text-label">
       Raw OCR Text:
     </div>

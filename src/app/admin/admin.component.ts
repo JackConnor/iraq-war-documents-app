@@ -47,6 +47,14 @@ export class AdminComponent implements OnInit {
   }
 
   async submitNewDocument(title: any, date: any, categories: any, pdfLink: any, ocrText: any) {
+    const catArray = categories.value.split(',');
+    console.log(catArray);
+    for (let i = 0; i < catArray.length; i++) {
+      if (catArray[i][0] === ' ') {
+        catArray[i] = catArray[i].split('').splice(1, 5000).join('');
+      }
+    }
+    console.log(catArray);
     if (!title.value || title.value ==  '') {
       alert('Please add a title');
       return;
@@ -64,7 +72,7 @@ export class AdminComponent implements OnInit {
       title: title.value,
       date: date.value,
       dateCreated: Date.now(),
-      categories: categories.value.replace(/\s+/g, '').split(','),
+      categories: catArray,
       pdfLink: pdfCloudLink,
       ocrText: ocrText.value,
     }
