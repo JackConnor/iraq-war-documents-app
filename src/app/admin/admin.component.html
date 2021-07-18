@@ -7,7 +7,7 @@
     <input #date type="text" placeholder="Date">
     <input #categories type="text" placeholder="Categories (comma seperated)">
     <input #pdfLink type="file" placeholder="PDF Link" (change)="openPdf($event)">
-    <textarea #ocrText type="text" placeholder="OCR Text"></textarea>
+    <textarea class="ocr-text" #ocrText type="text" placeholder="OCR Text"></textarea>
     <div
       class="submit-document-button"
       (click)="submitNewDocument(
