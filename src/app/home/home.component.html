@@ -1,5 +1,8 @@
 <div class="password-modal" *ngIf="documentLocked">
-  <input type="password" placeholder="Enter password" (keyup.enter)="tryPassword($event)">
+  <input #pwInput type="password" placeholder="Enter password" (keyup.enter)="tryPassword($event)">
+  <div class="password-button" (click)="tryPassword({target: pwInput})">
+    Submit
+  </div>
 </div>
 <div class="page-holder" *ngIf="!documentLocked">
   <div class="map-holder">
