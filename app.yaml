@@ -2,7 +2,7 @@ runtime: python27
 api_version: 1
 threadsafe: true
 handlers:
-- url: /(.*\.(gif|png|MOV|mov|mp4|jpg|html|css|js|xml|ttf)(|\.map))$
+- url: /(.*\.(gif|png|MOV|mov|mp4|jpg|html|css|js|xml|pdf|ttf)(|\.map))$
   static_files: dist/browser/\1
   upload: dist/browser/(.*)(|\.map)
 

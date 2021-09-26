@@ -8,8 +8,9 @@
   position: relative;
   display: inline-block;
   vertical-align: top;
-  width: 50%;
+  width: 100%;
   height: 100vh;
+  margin-top: 25px;
   @media screen and (max-width:769px) {
     width: 100%;
     height: 75vh;
@@ -25,7 +26,7 @@
 
 .text-holder {
   display: inline-block;
-  width: 50%;
+  width: 100%;
   vertical-align: top;
   padding: 25px 45px;
   box-sizing: border-box;
@@ -54,4 +55,9 @@
 
 .text-date {
   margin-top: 10px;
+}
+
+#pdf-canvas {
+  border: 3px solid black;
+  transform: rotatex(180deg)
 }

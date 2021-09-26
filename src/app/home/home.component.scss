@@ -3,7 +3,7 @@
 .page-holder {
   position: relative;
   padding-bottom: 150px;
-  max-width: 1000px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 0 15px 150px 15px;
   background-color: #f9f9f9;
@@ -116,7 +116,10 @@
     text-align: center;
     background-color: #d3d3d3;
     cursor: default;
-
+    transition: opacity .2s ease-in-out;
+    &:hover {
+      opacity: 0.7;
+    }
   }
 }
 
@@ -153,6 +156,7 @@
   padding: 35px 15px 20px 15px;
   background-color: white;
   box-sizing: border-box;
+  overflow-wrap: break-word;
   cursor: default;
   transition: background-color .2s ease-in-out;
   &:hover {
@@ -197,5 +201,27 @@
   font-size: 14px;
   &-first-of-type {
     margin-left: 0;
+  }
+}
+
+.password-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: grey;
+  z-index: 999;
+
+  input {
+    position: absolute;
+    width: 350px;
+    height: 60px;
+    font-size: 16px;
+    border-radius: 4px;
+    margin: 100px auto 0 auto;
+    left: 0;
+    right: 0;
+    background-color: white;
   }
 }

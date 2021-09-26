@@ -1,9 +1,4 @@
 <div class="document-holder">
-  <div class="pdf-holder" *ngIf="document">
-    <iframe
-      class="pdf-embed"
-    ></iframe>
-  </div>
   <div class="text-holder" *ngIf="document">
     <div class="text-title">
       {{document.title}}
@@ -14,11 +9,10 @@
     <div class="text-date" *ngIf="document && document.categories">
       Categories: {{document.categories.join(', ')}}
     </div>
-    <div class="text-label">
-      Raw OCR Text:
-    </div>
-    <div class="text-text">
-      {{document.ocrText}}
+    <div class="pdf-holder" *ngIf="document">
+      <iframe
+        class="pdf-embed"
+      ></iframe>
     </div>
   </div>
 </div>

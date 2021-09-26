@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit {
   env: any = environment;
   orderedDocs: any = [];
   title = 'iraqWar';
+  documentLocked: boolean = true
   constructor(
     private http: HttpClient,
     private router: Router,
@@ -26,11 +27,16 @@ export class HomeComponent implements OnInit {
     this.setupDocuments();
   }
 
+  async tryPassword(evt) {
+    if (evt.target.value === 'iraq123') {
+      console.log('goo')
+      this.documentLocked = false;
+    }
+  }
+
   async setupDocuments() {
     this.orderedDocs = await this.getIraqDocs();
-    console.log(this.orderedDocs);
     this.categories = await this.makeCategoriesList(this.orderedDocs);
-    console.log(this.categories);
   }
 
 

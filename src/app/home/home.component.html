@@ -1,4 +1,7 @@
-<div class="page-holder">
+<div class="password-modal" *ngIf="documentLocked">
+  <input type="password" placeholder="Enter password" (keyup.enter)="tryPassword($event)">
+</div>
+<div class="page-holder" *ngIf="!documentLocked">
   <div class="map-holder">
     <div class="map-image-holder">
       <img src="https://usarmyiraqwar.com/wp-content/uploads/2021/02/Picture1.png" alt="">
@@ -12,7 +15,7 @@
         iraq war
       </div>
       <div class="map-subtitle">
-        The Official History and Declassified Archives By the Authors
+        The Official History and Declassified Archives
       </div>
     </div>
   </div>
