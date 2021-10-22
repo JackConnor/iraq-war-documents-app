@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
   env: any = environment;
   orderedDocs: any = [];
   title = 'iraqWar';
-  documentLocked: boolean = false;
+  documentLocked: boolean = true;
   docsLoading: boolean = false;
   constructor(
     private http: HttpClient,
