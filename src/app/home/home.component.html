@@ -28,6 +28,7 @@
         #searchEl type="text"
         placeholder="Search Term"
         (keyup.enter)="searchTerm(searchEl)"
+        id="search-input"
       >
       <div class="search-button" (click)="searchTerm(searchEl)">
         Search
@@ -39,15 +40,31 @@
       <div class="single-tag-holder-title">
         {{ key.key }}
       </div>
-      <input type="checkbox" [id]="key.key" (click)="selectCategories(key.key)" />
+      <input
+        type="checkbox"
+        [id]="key.key"
+        (click)="selectCategories(key.key)"
+        class="category-tag"
+      />
     </div>
   </div>
   <div class="results-holder">
     <div
       class="no-results-present"
-      *ngIf="!orderedDocs || orderedDocs.length === 0"
+      *ngIf="!docsLoading && (!orderedDocs || orderedDocs.length === 0)"
     >
       No Documents Present
+    </div>
+    <div
+      class="no-results-present"
+      *ngIf="docsLoading && (!orderedDocs || orderedDocs.length === 0)"
+    >
+      Loading Documents
+      <div class="loading-balls">
+        <div class="ball"></div>
+        <div class="ball"></div>
+        <div class="ball"></div>
+      </div>
     </div>
     <div
       *ngIf="orderedDocs && orderedDocs.length > 0"
@@ -58,7 +75,7 @@
         [routerLink]="['/document/' + doc._id]"
       >
         <div class="doc-title">
-          {{doc.title}}
+          Title: {{doc.title}}
         </div>
         <div class="categories-holder">
           <div class="categories-title">

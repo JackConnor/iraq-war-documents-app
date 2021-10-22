@@ -1,0 +1,92 @@
+.bio-holder {
+  min-height: 100vh;
+  padding-bottom: 175px;
+  box-sizing: border-box;
+  background-color: #ececec;
+}
+
+.bio-header {
+  width: 100%;
+  font-size: 34px;
+  padding: 35px 25px 20px 25px;
+  box-sizing: border-box;
+  background-color: #ececec;
+}
+
+.bio-data-holder {
+  padding: 0 25px;
+  box-sizing: border-box;
+}
+
+.bio-cell {
+  display: inline-block;
+  vertical-align: top;
+  width: 50%;
+  height: 700px;
+  margin-top: 25px;
+  box-sizing: border-box;
+  &:nth-of-type(2n + 1) {
+    padding-right: 10px;
+  }
+  &:nth-of-type(2n) {
+    padding-left: 10px;
+  }
+  &-inner {
+    width: 100%;
+    height: 100%;
+    padding: 25px;
+    border-radius: 4px;
+    background-color: white;
+    box-sizing: border-box;
+  }
+}
+
+.image-holder {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  overflow: hidden;
+  img {
+    position: absolute;
+    width: 100%;
+  }
+}
+
+.bio-name {
+  padding-top: 15px;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.bio-title {
+  font-size: 20px;
+  font-style: italic;
+}
+
+.bio-blurb {
+  font-size: 16px;
+  line-height: 20px;
+  box-sizing: border-box;
+  padding-top: 15px;
+}
+
+.additional-credits-holder {
+  margin-top: 25px;
+  padding: 25px;
+  border-radius: 4px;
+  box-sizing: border-box;
+  background-color: white;
+}
+
+.additional-credits-title {
+  font-size: 24px;
+  font-weight: 700;
+  padding: 10px 0;
+}
+
+.additional-credit {
+  padding: 5px 10px;
+  font-size: 20px;
+  box-sizing: border-box;
+}

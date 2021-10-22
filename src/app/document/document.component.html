@@ -1,18 +1,22 @@
 <div class="document-holder">
-  <div class="text-holder" *ngIf="document">
-    <div class="text-title">
-      {{document.title}}
-    </div>
-    <div class="text-date">
-      Date: {{document.date}}
-    </div>
-    <div class="text-date" *ngIf="document && document.categories">
-      Categories: {{document.categories.join(', ')}}
-    </div>
-    <div class="pdf-holder" *ngIf="document">
-      <iframe
-        class="pdf-embed"
-      ></iframe>
+  <div class="document-holder-inner">
+    <div class="text-holder" *ngIf="document">
+      <div class="text-title">
+        {{document.title}}
+      </div>
+      <div class="text-date">
+        Date: {{document.date}}
+      </div>
+      <div class="text-date" *ngIf="document && document.categories">
+        Categories: {{document.categories.join(', ')}}
+      </div>
+      <div class="pdf-holder" *ngIf="document">
+        <div class="pdf-holder-inner">
+          <iframe
+            class="pdf-embed"
+          ></iframe>
+        </div>
+      </div>
     </div>
   </div>
 </div>

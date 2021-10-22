@@ -10,10 +10,7 @@ const app = express();
 app.use(requireHTTPS);
 
 app.use(express.static('./dist/iraqWar'));
-console.log('APP SET')
 app.get('/*', function(req, res) {
-  console.log('GOT ONE')
-  console.log(req)
   res.sendFile('index.html', {root: './dist/iraqWar/'});
 });
 

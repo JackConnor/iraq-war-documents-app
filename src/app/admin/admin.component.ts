@@ -28,14 +28,12 @@ export class AdminComponent implements OnInit {
   }
 
   async deleteSingleDoc(id: any) {
-    console.log('Deleteing')
     return new Promise(async (res, rej) => {
       const docs: any = await this.http.post(
         `${this.env.apiUrl}/clinics/delete-single-iraq-document`,
         { id: id}
       ).toPromise();
       try {
-        console.log('Del')
         this.getAllDocs();
         res(docs.docs);
       }
@@ -48,13 +46,11 @@ export class AdminComponent implements OnInit {
 
   async submitNewDocument(title: any, date: any, categories: any, pdfLink: any, ocrText: any) {
     const catArray = categories.value.split(',');
-    console.log(catArray);
     for (let i = 0; i < catArray.length; i++) {
       if (catArray[i][0] === ' ') {
         catArray[i] = catArray[i].split('').splice(1, 5000).join('');
       }
     }
-    console.log(catArray);
     if (!title.value || title.value ==  '') {
       alert('Please add a title');
       return;
@@ -95,7 +91,6 @@ export class AdminComponent implements OnInit {
   async getAllDocs() {
     const docs: any = await this.getIraqDocs();
     this.docs = docs.reverse();
-    console.log(docs);
   }
 
   getIraqDocs() {
@@ -129,8 +124,6 @@ export class AdminComponent implements OnInit {
       xhr.addEventListener('load', (data) => {
         const status = xhr.status;
         if (status === 200) {
-          console.log(data);
-          console.log(xhr);
           const newUrl = xhr.responseURL.split('?')[0];
           res(`https://storage.cloud.google.com/testing-storage-video-5555/${newFileName}`);
         }
