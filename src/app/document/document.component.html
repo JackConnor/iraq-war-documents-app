@@ -12,10 +12,22 @@
       </div>
       <div class="pdf-holder" *ngIf="document">
         <div class="pdf-holder-inner">
-          <canvas id="the-canvas"></canvas>
-          <!-- <iframe
+          <pdf-viewer
+              [src]="pdfLink"
+              [render-text]="true"
+              style="display: block;"
+          ></pdf-viewer>
+          <!-- <canvas id="the-canvas"></canvas> -->
+          <embed
+            *ngIf="pdfLink"
+            [src]="pdfLink"
             class="pdf-embed"
-          ></iframe> -->
+            type="application/pdf"
+            frameBorder="0"
+            scrolling="auto"
+            height="100%"
+            width="100%"
+          >
         </div>
       </div>
     </div>
