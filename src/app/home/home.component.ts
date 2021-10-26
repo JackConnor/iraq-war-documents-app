@@ -49,6 +49,7 @@ export class HomeComponent implements OnInit {
       ).toPromise();
       try {
         this.docsLoading = false;
+        console.log(docs.docs)
         res(docs.docs);
       }
       catch(err) {
