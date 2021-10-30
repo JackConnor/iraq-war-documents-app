@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { DomSanitizer, SafeUrl } from "@angular/platform-browser";
+import { PdfViewerComponent } from 'ng2-pdf-viewer';
 
 import { environment } from 'src/environments/environment';
 
@@ -13,6 +14,7 @@ import { environment } from 'src/environments/environment';
 export class DocumentComponent implements OnInit {
   document: any = {};
   documentId: string = '';
+  documentDate: string = '';
   env: any = environment;
   pdfLink: any;
   constructor(
@@ -27,60 +29,17 @@ export class DocumentComponent implements OnInit {
     this.getSingleDoc();
   }
 
-  addPdfLink() {
-    // console.log(window)
-    const el: any = document.getElementsByClassName('pdf-embed')[0];
-    // el['src'] = this.pdfLink;
-    // var url = this.pdfLink
-    //
-    // // Loaded via <script> tag, create shortcut to access PDF.js exports.
-    // var pdfjsLib = window['pdfjs-dist/build/pdf'];
-    // console.log(pdfjsLib)
-    //
-    // // The workerSrc property shall be specified.
-    // pdfjsLib.GlobalWorkerOptions.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.js';
-    //
-    // // Asynchronous download of PDF
-    // var loadingTask = pdfjsLib['getDocument'](url);
-    // loadingTask.promise.then(function(pdf) {
-    //   console.log('PDF loaded');
-    //
-    //   // Fetch the first page
-    //   var pageNumber = 1;
-    //   pdf.getPage(pageNumber).then(function(page) {
-    //     console.log('Page loaded');
-    //
-    //     var scale = 1.5;
-    //     var viewport = page.getViewport({scale: scale});
-    //
-    //     // Prepare canvas using PDF page dimensions
-    //     var canvas = document.getElementById('the-canvas');
-    //     var context = canvas['getContext']('2d');
-    //     canvas['height'] = viewport['height'];
-    //     canvas['width'] = viewport['width'];
-    //
-    //     // Render PDF page into canvas context
-    //     var renderContext = {
-    //       canvasContext: context,
-    //       viewport: viewport
-    //     };
-    //     var renderTask = page.render(renderContext);
-    //     renderTask.promise.then(function () {
-    //       console.log('Page rendered');
-    //     });
-    //   });
-    // }, function (reason) {
-    //   // PDF loading error
-    //   console.error(reason);
-    // });
-  }
 
   async getSingleDoc(): Promise<any> {
     const doc: any = await this.getSingleIraqDoc();
     try {
       this.document = doc;
-      this.pdfLink = this.sanitizer.bypassSecurityTrustResourceUrl(this.document.pdfLink);
-      this.addPdfLink();
+      const dateArr = doc.date.split('')
+      dateArr.splice(4, 0, '-')
+      dateArr.splice(7, 0, '-')
+      this.documentDate = dateArr.join('')
+      const pdfLink = this.document.pdfLink;
+      this.pdfLink = 'https://storage.googleapis.com/testing-storage-video-5555' + pdfLink.split('testing-storage-video-5555')[1];
     }
     catch(err) {
       console.log(err);

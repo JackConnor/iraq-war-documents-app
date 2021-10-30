@@ -4,30 +4,31 @@
       <div class="text-title">
         {{document.title}}
       </div>
-      <div class="text-date">
-        Date: {{document.date}}
+
+      <div class="text-date" *ngIf="documentDate">
+        Date: {{documentDate}}
       </div>
       <div class="text-date" *ngIf="document && document.categories">
         Categories: {{document.categories.join(', ')}}
       </div>
       <div class="pdf-holder" *ngIf="document">
+        <a
+          [href]="pdfLink"
+          [download]="pdfLink"
+          target="_blank"
+          type="application/octet-stream"
+          class="download-button"
+        >
+          Go to Download Page
+        </a>
         <div class="pdf-holder-inner">
-          <pdf-viewer
+          <div class="" *ngIf="pdfLink">
+            <pdf-viewer
               [src]="pdfLink"
-              [render-text]="true"
               style="display: block;"
-          ></pdf-viewer>
-          <!-- <canvas id="the-canvas"></canvas> -->
-          <embed
-            *ngIf="pdfLink"
-            [src]="pdfLink"
-            class="pdf-embed"
-            type="application/pdf"
-            frameBorder="0"
-            scrolling="auto"
-            height="100%"
-            width="100%"
-          >
+              [fit-to-page]="true"
+            ></pdf-viewer>
+          </div>
         </div>
       </div>
     </div>
