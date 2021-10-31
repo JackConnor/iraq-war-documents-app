@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
+import { CategoryService } from 'src/services/categoryService';
 
 import { environment } from 'src/environments/environment';
 
@@ -22,6 +23,7 @@ export class HomeComponent implements OnInit {
     private http: HttpClient,
     private router: Router,
     private route: ActivatedRoute,
+    private categoryService: CategoryService = new CategoryService(),
   ) {}
 
   ngOnInit() {
@@ -36,7 +38,8 @@ export class HomeComponent implements OnInit {
 
   async setupDocuments() {
     this.orderedDocs = await this.getIraqDocs();
-    this.categories = await this.makeCategoriesList(this.orderedDocs);
+    const categories = await this.makeCategoriesList(this.orderedDocs);
+    this.categories = this.categoryService.getFilteredCategories(categories)
   }
 
 
@@ -63,13 +66,14 @@ export class HomeComponent implements OnInit {
     const categories = {};
     for (let i = 0; i < docList.length; i++) {
       for (let x = 0; x < docList[i].categories.length; x++) {
-        if (!categories[docList[i].categories[x]]) {
-          categories[docList[i].categories[x]] = {
+        if (!categories[docList[i].categories[x].trim()]) {
+          categories[docList[i].categories[x].trim()] = {
             selected: false,
           }
         }
       }
     }
+    console.log(categories)
     return categories;
   }
 
@@ -110,8 +114,11 @@ export class HomeComponent implements OnInit {
         catList.push(key)
       }
     }
-
-    this.orderedDocs = await this.searchCategory(catList);
+    if (catList && catList.length > 0) {
+      this.orderedDocs = await this.searchCategory(catList);
+    } else {
+      this.getIraqDocs()
+    }
   }
 
   async searchCategory(categories: string[]) {

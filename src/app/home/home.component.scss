@@ -1,9 +1,45 @@
 
+.header {
+  position: fixed;
+  width: 100vw;
+  height: 90px;
+  top: 0;
+  left: 0;
+  background-color: #f9f9f9;
+  @media screen and (max-width: 500px) {
+    height: 70px;
+  }
+  .link {
+    display: inline-block;
+    float: right;
+    height: 50px;
+    line-height: 40px;
+    margin-top: 20px;
+    padding: 5px 40px;
+    font-size: 20px;
+    vertical-align: top;
+    box-sizing: border-box;
+    color: black;
+    @media screen and (max-width: 500px) {
+      width: 50%;
+      padding: 0;
+      float: unset;
+      margin: 15px 0 0 0 !important;
+      text-align: center;
+    }
+    &:first-of-type {
+      margin-right: 50px;
+    }
+  }
+}
+
 
 .page-holder {
   position: relative;
   padding-bottom: 150px;
   max-width: 1200px;
+  width: 100vw;
+  box-sizing: border-box;
   margin: 0 auto;
   padding: 0 15px 150px 15px;
   background-color: #f9f9f9;
@@ -15,15 +51,23 @@
   position: relative;
   width: 100%;
   height: 100vh;
+  margin-top: 90px;
   max-height: 700px;
   box-sizing: border-box;
   overflow: hidden;
   box-sizing: border-box;
+  @media screen and (max-width: 500px) {
+    margin-top: 70px;
+    height: auto;
+  }
   img {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
+    @media screen and (max-width: 500px) {
+      position: relative;
+    }
   }
   .map-filter {
     position: absolute;
@@ -58,7 +102,11 @@
   margin-top: 50px;
   font-size: 64px;
   @media screen and (max-width: 768px) {
-    font-size: 46px;
+    font-size: 34px;
+  }
+  @media screen and (max-width: 500px) {
+    margin-top: 25px;
+    font-size: 30px;
   }
 }
 
@@ -68,6 +116,9 @@
   @media screen and (max-width: 768px) {
     font-size: 64px;
   }
+  @media screen and (max-width: 500px) {
+    font-size: 38px;
+  }
 }
 
 .map-subtitle {
@@ -75,6 +126,9 @@
   font-size: 36px;
   @media screen and (max-width: 768px) {
     font-size: 28px;
+  }
+  @media screen and (max-width: 500px) {
+    font-size: 22px;
   }
 }
 
@@ -88,8 +142,12 @@
   position: relative;
   padding: 0 25px;
   box-sizing: border-box;
-  @media screen and (max-width: 768px) {
-    width: 300px;
+  @media screen and (max-width: 769px) {
+    width: 600px;
+  }
+  @media screen and (max-width: 500px) {
+    width: 100%;
+    padding: 0 10px;
   }
   input {
     position: relative;
@@ -132,6 +190,10 @@
   margin: 0 auto;
   border-radius: 4px;
   box-sizing: border-box;
+  @media screen and (max-width: 500px) {
+    width: 100%;
+    padding: 0 5px;
+  }
 }
 
 .tags-holder {
@@ -140,6 +202,9 @@
   width: 20%;
   background-color: white;
   box-sizing: border-box;
+  @media screen and (max-width: 500px) {
+    display: none;
+  }
 }
 
 .no-results-present {
@@ -151,6 +216,14 @@
   text-align: center;
   box-sizing: border-box;
   font-style: italic;
+  @media screen and (max-width: 769px) {
+    width: 300px;
+    // margin: 0 auto;
+  }
+  @media screen and (max-width: 500px) {
+    width: 300px;
+    margin: 0 auto;
+  }
 }
 
 .single-result {
@@ -163,6 +236,10 @@
   overflow-wrap: break-word;
   cursor: default;
   transition: background-color .2s ease-in-out;
+  @media screen and (max-width: 500px) {
+    width: 100%;
+    margin: 0 auto;
+  }
   &:hover {
     background-color: #e0f2fb;
   }
@@ -171,6 +248,9 @@
   }
   .doc-title {
     font-size: 28px;
+    @media screen and (max-width: 500px) {
+      font-size: 20px;
+    }
   }
 }
 

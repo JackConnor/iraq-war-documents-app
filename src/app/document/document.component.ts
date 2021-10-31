@@ -4,6 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { DomSanitizer, SafeUrl } from "@angular/platform-browser";
 import { PdfViewerComponent } from 'ng2-pdf-viewer';
 
+import { CategoryService } from 'src/services/categoryService';
+
 import { environment } from 'src/environments/environment';
 
 @Component({

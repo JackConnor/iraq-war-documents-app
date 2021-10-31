@@ -82,11 +82,24 @@
           <div class="categories-title">
             Categories:
           </div>
-          <div class="single-category" *ngFor="let cat of doc.categories">
+          <div class="single-category" *ngFor="let cat of doc.categories | categories : cat">
             {{cat}}
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
+
+<div class="header">
+  <a [routerLink]="['/press']">
+    <div class="link">
+      Press Page
+    </div>
+  </a>
+  <a [routerLink]="['/people']">
+    <div class="link">
+      Our People
+    </div>
+  </a>
 </div>

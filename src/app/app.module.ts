@@ -8,13 +8,15 @@ import { AppComponent } from './app.component';
 import { DocumentComponent } from './document/document.component';
 import { HomeComponent } from './home/home.component';
 import { AdminComponent } from './admin/admin.component';
+import { CategoriesPipe } from './categories.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     DocumentComponent,
     HomeComponent,
-    AdminComponent
+    AdminComponent,
+    CategoriesPipe
   ],
   imports: [
     BrowserModule,

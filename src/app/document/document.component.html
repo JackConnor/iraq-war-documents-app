@@ -9,7 +9,7 @@
         Date: {{documentDate}}
       </div>
       <div class="text-date" *ngIf="document && document.categories">
-        Categories: {{document.categories.join(', ')}}
+        Categories: {{document.categories | categories : document.categories}}
       </div>
       <div class="pdf-holder" *ngIf="document">
         <a
