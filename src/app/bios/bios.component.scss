@@ -8,7 +8,7 @@
 .bio-header {
   width: 100%;
   font-size: 34px;
-  padding: 35px 25px 20px 25px;
+  padding: 100px 25px 20px 25px;
   box-sizing: border-box;
   background-color: #ececec;
 }
@@ -22,7 +22,7 @@
   display: inline-block;
   vertical-align: top;
   width: 50%;
-  height: 700px;
+  min-height: 700px;
   margin-top: 25px;
   box-sizing: border-box;
   &:nth-of-type(2n + 1) {
@@ -30,6 +30,9 @@
   }
   &:nth-of-type(2n) {
     padding-left: 10px;
+  }
+  @media screen and (max-width: 550px) {
+    width: 100%;
   }
   &-inner {
     width: 100%;
@@ -89,4 +92,38 @@
   padding: 5px 10px;
   font-size: 20px;
   box-sizing: border-box;
+}
+
+.header {
+  position: fixed;
+  width: 100vw;
+  height: 90px;
+  top: 0;
+  left: 0;
+  background-color: #f9f9f9;
+  @media screen and (max-width: 500px) {
+    height: 70px;
+  }
+  .link {
+    display: inline-block;
+    float: right;
+    height: 50px;
+    line-height: 40px;
+    margin-top: 20px;
+    padding: 5px 40px;
+    font-size: 20px;
+    vertical-align: top;
+    box-sizing: border-box;
+    color: black;
+    @media screen and (max-width: 500px) {
+      width: 33.3%;
+      padding: 0;
+      float: unset;
+      margin: 15px 0 0 0 !important;
+      text-align: center;
+    }
+    &:first-of-type {
+      margin-right: 50px;
+    }
+  }
 }

@@ -7,6 +7,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DocumentComponent } from './document/document.component';
 import { HomeComponent } from './home/home.component';
+import { PressComponent } from './press/press.component';
+import { BiosComponent } from './bios/bios.component';
 import { AdminComponent } from './admin/admin.component';
 import { CategoriesPipe } from './categories.pipe';
 
@@ -16,7 +18,9 @@ import { CategoriesPipe } from './categories.pipe';
     DocumentComponent,
     HomeComponent,
     AdminComponent,
-    CategoriesPipe
+    PressComponent,
+    BiosComponent,
+    CategoriesPipe,
   ],
   imports: [
     BrowserModule,

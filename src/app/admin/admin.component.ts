@@ -30,7 +30,7 @@ export class AdminComponent implements OnInit {
   async deleteSingleDoc(id: any) {
     return new Promise(async (res, rej) => {
       const docs: any = await this.http.post(
-        `${this.env.apiUrl}/clinics/delete-single-iraq-document`,
+        `${this.env.apiUrl}/delete-single-iraq-document`,
         { id: id}
       ).toPromise();
       try {
@@ -77,7 +77,7 @@ export class AdminComponent implements OnInit {
       return;
     }
     this.http.post(
-      `${this.env.apiUrl}/clinics/post-iraq-document`,
+      `${this.env.apiUrl}/post-iraq-document`,
       req
     ).subscribe((data: any) => {
       this.docs = data['docs'].reverse();
@@ -96,7 +96,7 @@ export class AdminComponent implements OnInit {
   getIraqDocs() {
     return new Promise(async (res, rej) => {
       const docs: any = await this.http.post(
-        `${this.env.apiUrl}/clinics/get-iraq-documents`,
+        `${this.env.apiUrl}/get-iraq-documents`,
         {}
       ).toPromise();
       try {

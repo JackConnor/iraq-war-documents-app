@@ -47,7 +47,7 @@ export class HomeComponent implements OnInit {
     this.docsLoading = true;
     return new Promise(async (res, rej) => {
       const docs: any = await this.http.post(
-        `${this.env.apiUrl}/clinics/get-iraq-documents`,
+        `${this.env.apiUrl}/get-iraq-documents`,
         {}
       ).toPromise();
       try {
@@ -93,7 +93,7 @@ export class HomeComponent implements OnInit {
       cats[i]['checked'] = false;
     }
     const { docs }: any = await this.http.post(
-      `${this.env.apiUrl}/clinics/get-iraq-documents`,
+      `${this.env.apiUrl}/get-iraq-documents`,
       { searchQuery: terms }
     ).toPromise();
     this.orderedDocs = docs;
@@ -117,7 +117,8 @@ export class HomeComponent implements OnInit {
     if (catList && catList.length > 0) {
       this.orderedDocs = await this.searchCategory(catList);
     } else {
-      this.getIraqDocs()
+      console.log('BOOM')
+      this.orderedDocs = await this.getIraqDocs();
     }
   }
 
@@ -126,11 +127,50 @@ export class HomeComponent implements OnInit {
     const inputEl = document.getElementById('search-input')
     inputEl['value'] = '';
     const { docs }: any = await this.http.post(
-      `${this.env.apiUrl}/clinics/get-iraq-documents-by-category`,
+      `${this.env.apiUrl}/get-iraq-documents-by-category`,
       { categories }
     ).toPromise();
     this.docsLoading = false;
     return docs;
+  }
+
+  getBannedList() {
+    return [
+      'P',
+      'p',
+      'B',
+      'b',
+      'S',
+      'O',
+      'T',
+      'C',
+      'M',
+      'N',
+      'CC',
+      'L',
+      'F',
+      'OO',
+      'I',
+      'E',
+      'CA',
+      'R',
+      'A',
+      'PO',
+      'PG',
+      'SR',
+      'OP',
+      'CP',
+      'IE',
+      'CC',
+      'RFI',
+      'SP',
+      'ROE',
+      'TST',
+      'AAR',
+      'CONP',
+      'OS',
+      'TO',
+    ]
   }
 
 }

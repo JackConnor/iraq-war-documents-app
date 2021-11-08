@@ -12,7 +12,7 @@ export class CategoryService {
     for (let key in cats) {
       if (key === 'P') {
         cats['Paper'] = cats['P']
-        // delete cats['P']
+        delete cats['P']
       }
       if (key === 'B') {
         cats['Briefing'] = cats['B']

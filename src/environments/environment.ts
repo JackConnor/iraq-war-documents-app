@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://localhost:5555/api',
+  apiUrl: 'https://asynchronous-medicine-server-dot-asynchronous-telemedicine.wl.r.appspot.com/api/clinics',
 };

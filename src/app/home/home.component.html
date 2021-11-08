@@ -1,10 +1,10 @@
-<div class="password-modal" *ngIf="documentLocked">
+<!-- <div class="password-modal" *ngIf="documentLocked">
   <input #pwInput type="password" placeholder="Enter password" (keyup.enter)="tryPassword($event)">
   <div class="password-button" (click)="tryPassword({target: pwInput})">
     Submit
   </div>
-</div>
-<div class="page-holder" *ngIf="!documentLocked">
+</div> -->
+<!-- <div class="page-holder" *ngIf="!documentLocked"> -->
 <div class="page-holder" *ngIf="true">
   <div class="map-holder">
     <div class="map-image-holder">
@@ -37,28 +37,30 @@
     </div>
   </div>
   <div class="tags-holder">
-    <div class="single-tag-holder" *ngFor="let key of categories | keyvalue">
-      <div class="single-tag-holder-title">
-        {{ key.key }}
+    <span *ngFor="let key of categories | keyvalue">
+      <div class="single-tag-holder" *ngIf="!getBannedList().includes(key.key)">
+        <div class="single-tag-holder-title">
+          {{ key.key }}
+        </div>
+        <input
+          type="checkbox"
+          [id]="key.key"
+          (click)="selectCategories(key.key)"
+          class="category-tag"
+        />
       </div>
-      <input
-        type="checkbox"
-        [id]="key.key"
-        (click)="selectCategories(key.key)"
-        class="category-tag"
-      />
-    </div>
+    </span>
   </div>
   <div class="results-holder">
     <div
       class="no-results-present"
       *ngIf="!docsLoading && (!orderedDocs || orderedDocs.length === 0)"
     >
-      No Documents Present
+      No results. Start a search to see our documents on the Iraq War.
     </div>
     <div
       class="no-results-present"
-      *ngIf="docsLoading && (!orderedDocs || orderedDocs.length === 0)"
+      *ngIf="docsLoading"
     >
       Loading Documents
       <div class="loading-balls">
@@ -68,7 +70,7 @@
       </div>
     </div>
     <div
-      *ngIf="orderedDocs && orderedDocs.length > 0"
+      *ngIf="!docsLoading && orderedDocs && orderedDocs.length > 0"
     >
       <div
         class="single-result"
@@ -82,9 +84,15 @@
           <div class="categories-title">
             Categories:
           </div>
-          <div class="single-category" *ngFor="let cat of doc.categories | categories : cat">
-            {{cat}}
-          </div>
+          <span class="" *ngFor="let cat of doc.categories | categories : cat">
+            <div
+              class="single-category"
+              *ngIf="!getBannedList().includes(cat)"
+            >
+              {{cat}}
+            </div>
+          </span>
+
         </div>
       </div>
     </div>

@@ -7,6 +7,7 @@ export class CategoriesPipe implements PipeTransform {
 
   transform(catArr: any): unknown {
     console.log(catArr)
+    let catArrNew = []
     if (typeof catArr == 'string') {
       catArr = [catArr]
     }
@@ -14,94 +15,93 @@ export class CategoriesPipe implements PipeTransform {
     for (let i = 0; i < catArr.length; i++) {
       let key = catArr[i].trim()
       catArr[i] = key
-      console.log(key)
       if (key === 'P') {
-        catArr.push('Paper');
+        catArrNew.push('Paper');
       }
       if (key === 'B') {
-        catArr.push('Briefing');
+        catArrNew.push('Briefing');
       }
       if (key === 'M') {
-        catArr.push('Memo');
+        catArrNew.push('Memo');
       }
       if (key === 'N') {
-        catArr.push('Notes');
+        catArrNew.push('Notes');
       }
       if (key === 'CC') {
-        catArr.push('Commanders Conference');
+        catArrNew.push('Commanders Conference');
       }
       if (key === 'L') {
-        catArr.push('Letter')
+        catArrNew.push('Letter')
       }
       if (key === 'F') {
-        catArr.push('FRAGO')
+        catArrNew.push('FRAGO')
       }
       if (key === 'OO') {
-        catArr.push('OPORD')
+        catArrNew.push('OPORD')
       }
       if (key === 'I') {
-        catArr.push('Interview')
+        catArrNew.push('Interview')
       }
       if (key === 'E') {
-        catArr.push('Email (Includes Teletype)')
+        catArrNew.push('Email (Includes Teletype)')
       }
       if (key === 'CA') {
-        catArr.push('Cable')
+        catArrNew.push('Cable')
       }
       if (key === 'R') {
-        catArr.push('Report')
+        catArrNew.push('Report')
       }
       if (key === 'A') {
-        catArr.push('Assessment')
+        catArrNew.push('Assessment')
       }
       if (key === 'PO') {
-        catArr.push('PLANORD')
+        catArrNew.push('PLANORD')
       }
       if (key === 'PG') {
-        ('Planning Guidance')
+        catArrNew.push('Planning Guidance')
       }
       if (key === 'SR') {
-        catArr.push('SITREP')
+        catArrNew.push('SITREP')
       }
       if (key === 'OP') {
-        catArr.push('OPLAN')
+        catArrNew.push('OPLAN')
       }
       if (key === 'CP') {
-        catArr.push('Campaign Plan')
+        catArrNew.push('Campaign Plan')
       }
       if (key === 'IE') {
-        ('intelligence Estimate')
+        catArrNew.push('intelligence Estimate')
       }
       if (key === 'CC') {
-        catArr.push('Command Chronology')
+        catArrNew.push('Command Chronology')
       }
       if (key === 'RFI') {
-        catArr.push('Request for Information')
+        catArrNew.push('Request for Information')
       }
       if (key === 'SP') {
-        catArr.push('Supplemental Plan')
+        catArrNew.push('Supplemental Plan')
       }
       if (key === 'ROE') {
-        catArr.push('Rules of Engagement')
+        catArrNew.push('Rules of Engagement')
       }
       if (key === 'TST') {
-        catArr.push('Time Sensitive Target Matrix')
+        catArrNew.push('Time Sensitive Target Matrix')
       }
       if (key === 'AAR') {
-        catArr.push('After Action Report')
+        catArrNew.push('After Action Report')
       }
       if (key === 'CONP') {
-        catArr.push('CONPLAN')
+        catArrNew.push('CONPLAN')
       }
       if (key === 'OS') {
-        catArr.push('OPSUM')
+        catArrNew.push('OPSUM')
       }
       if (key === 'TO') {
-        catArr.push('Tasking Order')
+        catArrNew.push('Tasking Order')
       }
     }
-    console.log(catArr)
-    return catArr;
+    console.log(catArrNew)
+    return catArrNew;
   }
 
 }

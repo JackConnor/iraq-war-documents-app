@@ -52,7 +52,7 @@ export class DocumentComponent implements OnInit {
   getSingleIraqDoc() {
     return new Promise(async (res, rej) => {
       const docs: any = await this.http.post(
-        `${this.env.apiUrl}/clinics/get-single-iraq-document`,
+        `${this.env.apiUrl}/get-single-iraq-document`,
         { id: this.documentId }
       ).toPromise();
       try {
@@ -63,6 +63,39 @@ export class DocumentComponent implements OnInit {
         rej(err);
       }
     });
+  }
+
+  getBannedList() {
+    return [
+      'P',
+      'B',
+      'M',
+      'N',
+      'CC',
+      'L',
+      'F',
+      'OO',
+      'I',
+      'E',
+      'CA',
+      'R',
+      'A',
+      'PO',
+      'PG',
+      'SR',
+      'OP',
+      'CP',
+      'IE',
+      'CC',
+      'RFI',
+      'SP',
+      'ROE',
+      'TST',
+      'AAR',
+      'CONP',
+      'OS',
+      'TO',
+    ]
   }
 
 }
